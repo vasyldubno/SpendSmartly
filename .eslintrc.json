@@ -36,12 +36,12 @@
 		"no-console": "off",
 		"import/prefer-default-export": "off",
 		"react/function-component-definition": "off",
-		// "react/jsx-filename-extension": [1, { "extensions": [".ts", ".tsx"] }],
+		"react/jsx-filename-extension": [1, { "extensions": [".ts", ".tsx"] }],
 		"react/react-in-jsx-scope": "off",
 		"@typescript-eslint/no-unused-vars": "off",
 		"react/jsx-props-no-spreading": "off",
 		"import/no-extraneous-dependencies": "off",
-		// "@typescript-eslint/no-explicit-any": "off", // Unexpected any type
+		"@typescript-eslint/no-explicit-any": "off", // Unexpected any type
 		"@typescript-eslint/no-unsafe-member-access": "off",
 		"import/extensions": [
 			"error",

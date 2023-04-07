@@ -1,0 +1,12 @@
+@import '@/styles/variables';
+
+.error {
+	position: relative;
+	color: $color-red;
+	font-family: var(--font-mono);
+	font-size: 0.7rem;
+	padding: 0 0 0.3rem;
+	// transform: translateX(50%);
+	// left: -25%;
+	text-align: center;
+}

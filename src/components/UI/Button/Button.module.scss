@@ -1,0 +1,31 @@
+@import '@/styles/variables';
+
+.button {
+	cursor: pointer;
+	display: flex;
+	background-color: transparent;
+	border: none;
+	color: $color-white;
+	border-radius: 1.6rem;
+	padding: 1rem;
+	align-items: center;
+	&:hover {
+		background-color: transparent;
+		border: none;
+	}
+}
+
+.wrapperIcon {
+	background-color: $color-white;
+	padding: 10px 12px;
+	margin-right: 12px;
+	border-radius: 1rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.title {
+	font-weight: 700;
+	font-size: 1rem;
+}

@@ -1,0 +1,26 @@
+@import './variables';
+
+:root {
+	--color-test: #0dc916;
+	--color-gray: #dad1d1;
+	--color-gray-50: #dad1d150;
+	--color-red: #fd3c4a;
+	--color-black: #000;
+	--color-black-const: #000;
+	--color-white: #fff;
+	--color-green: #00a86b;
+	--color-purple: #7f3dff;
+	--color-border-input: rgba(0, 0, 0, 0.23);
+}
+
+* {
+	font-family: $font;
+}
+
+p {
+	margin: 0;
+}
+
+.react-datepicker__month.react-datepicker__monthPicker {
+	display: flex;
+}

@@ -1,0 +1,20 @@
+.expenses {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+.header {
+	margin-bottom: 1rem;
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+}
+
+.empty {
+	margin: 0 auto;
+}
+
+.title {
+	margin-right: 1rem;
+}

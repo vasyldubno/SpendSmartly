@@ -1,0 +1,45 @@
+@import '@/styles/variables';
+
+.wrapper {
+	color: $color-black;
+	transition-duration: 0.3s;
+	&:hover {
+		scale: 1.05;
+		transition-duration: 0.3s;
+	}
+}
+
+.items {
+	display: flex;
+	justify-content: space-between;
+}
+
+.date {
+	font-size: 0.8rem;
+	color: $color-black-const;
+}
+
+.right {
+	display: flex;
+	align-items: center;
+}
+
+.iconRemove {
+	width: 1.2rem;
+	height: 1.2rem;
+	background: transparent;
+	border-width: 0;
+	padding: 0;
+	cursor: pointer;
+	fill: $color-black-const;
+}
+
+.amount {
+	margin-right: 0.5rem;
+	color: $color-black-const;
+}
+
+.description {
+	font-weight: 700;
+	color: $color-black-const;
+}

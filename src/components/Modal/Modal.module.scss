@@ -1,0 +1,68 @@
+@import '@/styles/variables';
+
+.wrapper {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 400px;
+	background: $color-white;
+	border: 2px solid $color-black;
+	boxshadow: 24;
+	padding: 2rem;
+	height: 90vh;
+	overflow-y: scroll;
+}
+
+.inputs {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 1rem;
+	text-align: left;
+}
+
+.input:not(:last-child) {
+	padding-bottom: 1rem;
+}
+
+.button {
+	color: $color-green;
+	background: $color-gray;
+	text-transform: none;
+}
+
+.close {
+	position: absolute;
+	top: 0.2rem;
+	left: 0.2rem;
+	background: transparent;
+	border-width: 0;
+}
+
+.closeIcon {
+	width: 2rem;
+	height: 2rem;
+	fill: $color-black;
+	cursor: pointer;
+}
+
+.error {
+	color: $color-red;
+	font-family: var(--font-mono);
+	font-size: 0.7rem;
+	padding: 0 0 1rem;
+}
+
+.error:not(:first-child) {
+	padding-top: 1rem;
+}
+
+.header {
+	color: $color-black-const;
+	padding-top: 2rem;
+	padding-bottom: 1rem;
+}
+
+.form {
+	text-align: center;
+}

@@ -1,3 +1,74 @@
 {
-  "extends": "next/core-web-vitals"
+	"extends": [
+		"next/core-web-vitals",
+		"airbnb",
+		"airbnb/hooks",
+		"eslint:recommended",
+		"prettier",
+		"plugin:prettier/recommended",
+		"plugin:@next/next/recommended",
+		"plugin:react/recommended",
+		"plugin:@typescript-eslint/recommended",
+		"plugin:@typescript-eslint/recommended-requiring-type-checking"
+	],
+	"parser": "@typescript-eslint/parser",
+	"plugins": ["@typescript-eslint"],
+	"parserOptions": {
+		"project": ["./tsconfig.json"],
+		"ecmaVersion": 2015,
+		"ecmaFeatures": {
+			"jsx": true
+		}
+	},
+	"settings": {
+		"react": {
+			"version": "detect"
+		}
+	},
+	"env": {
+		"browser": true,
+		"es6": true,
+		"jest": true,
+		"node": true
+	},
+	"rules": {
+		"prettier/prettier": ["error"],
+		"no-console": "off",
+		"import/prefer-default-export": "off",
+		"react/function-component-definition": "off",
+		"react/jsx-filename-extension": [1, { "extensions": [".ts", ".tsx"] }],
+		"react/react-in-jsx-scope": "off",
+		"@typescript-eslint/no-unused-vars": "off",
+		"react/jsx-props-no-spreading": "off",
+		"import/no-extraneous-dependencies": "off",
+		"@typescript-eslint/no-explicit-any": "warn",
+		"@typescript-eslint/no-unsafe-member-access": "off",
+		"import/extensions": [
+			"error",
+			{ "svg": "always", "css": "always", "scss": "always", "json": "always" }
+		],
+		"react/self-closing-comp": "off",
+		"react/require-default-props": "off",
+		"import/order": "off",
+		"@typescript-eslint/no-misused-promises": "off",
+		"react/no-array-index-key": "off",
+		"@typescript-eslint/no-floating-promises": "off",
+		"react/button-has-type": "off",
+		"react-hooks/exhaustive-deps": "off",
+		"no-shadow": "off", // Disallow variable declarations from shadowing variables declared in the outer scope
+		"@typescript-eslint/no-empty-function": "off", // Disallow empty functions
+		"react/jsx-no-useless-fragment": "off",
+		"@typescript-eslint/no-unsafe-assignment": "off",
+		"@typescript-eslint/no-unsafe-call": "off",
+		"@typescript-eslint/restrict-template-expressions": "off",
+		"@typescript-eslint/no-unsafe-return": "off",
+		"consistent-return": "off", // Arrow function expected no return value
+		"@typescript-eslint/no-var-requires": "off",
+		"no-await-in-loop": "off",
+		"no-underscore-dangle": "off",
+		"react/prop-types": "off"
+		// "consistent-return": "off"
+		// "@typescript-eslint/no-unsafe-assignment": "off"
+	},
+	"ignorePatterns": ["functions/*"]
 }

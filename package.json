@@ -11,7 +11,7 @@
 		"test": "jest --watch --silent",
 		"test:coverage": "jest --coverage -silent --ci",
 		"prepare": "husky install",
-		"lint-es": "eslint --fix --ext .ts,.tsx ./src"
+		"lint-es": "eslint --ext .ts,.tsx ./src"
 	},
 	"dependencies": {
 		"@axe-core/react": "^4.6.0",
@@ -81,8 +81,8 @@
 		"typescript-plugin-css-modules": "^4.2.2"
 	},
 	"lint-staged": {
-		"**/*.{js,jsx,ts,tsx}": [
-			"npm run lint-es"
-		]
+		"**/*.js": "eslint",
+		"**/*.ts?(x)": "eslint",
+		"**/*.md": "markdownlint-cli2"
 	}
 }

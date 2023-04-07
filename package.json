@@ -81,8 +81,6 @@
 		"typescript-plugin-css-modules": "^4.2.2"
 	},
 	"lint-staged": {
-		"**/*.js": "eslint",
-		"**/*.ts?(x)": "eslint",
-		"**/*.md": "markdownlint-cli2"
+		"src/**/*.ts?(x)": "npm run lint"
 	}
 }

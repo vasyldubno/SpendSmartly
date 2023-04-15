@@ -1,13 +1,16 @@
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { BsPencilSquare } from 'react-icons/bs'
 import { ModalCurrency } from './ModalCurrency/ModalCurrency'
-import { useAuth } from '@/components/AuthProvider'
-import { HeadLayout } from '@/components/HeadLayout'
+import s from './Settings.module.scss'
+import { HeadLayout } from '@/components/HeadLayout/HeadLayout'
 import { Header } from '@/components/Header/Header'
 import { Container } from '@/components/UI/Container/Container'
-import { Loader } from '@/components/UI/Loader'
+import { Loader } from '@/components/UI/Loader/Loader'
+import { PROJECT_NAME } from '@/config/consts'
 import { auth } from '@/config/firebase'
+import { useAuth } from '@/hooks/useAuth'
 import { Box, Tooltip } from '@mui/material'
 
 export const Settings = () => {
@@ -30,12 +33,12 @@ export const Settings = () => {
 
 	return (
 		<>
-			<HeadLayout title="Settings | Finance Tracker" />
+			<HeadLayout title={`Settings | ${PROJECT_NAME}`} />
 			<Container>
 				{authUser && !isLoading ? (
 					<>
 						<Header />
-						<h1>SETTINGS</h1>
+						<h1 className={s.title}>SETTINGS</h1>
 						<Box>
 							<p>Email: {email}</p>
 							<p>Name: {name}</p>

@@ -13,8 +13,8 @@ import { ControllerRenderProps, FieldValue } from 'react-hook-form'
 import { MdDeleteForever } from 'react-icons/md'
 import { AddNewCategory } from './AddNewCategory/AddNewCategory'
 import s from './SelectModal.module.scss'
-import { useAuth } from '@/components/AuthProvider'
 import { db } from '@/config/firebase'
+import { useAuth } from '@/hooks/useAuth'
 import { capitalizeFirstLetter } from '@/utils/capitalizeFirstLetter'
 import {
 	Box,

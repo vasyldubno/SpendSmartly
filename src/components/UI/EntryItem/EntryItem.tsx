@@ -4,8 +4,8 @@ import { deleteDoc, doc, updateDoc, increment } from 'firebase/firestore'
 import { Dispatch, FC, SetStateAction } from 'react'
 import { MdDeleteForever } from 'react-icons/md'
 import s from './EntryItem.module.scss'
-import { useAuth } from '@/components/AuthProvider'
 import { db } from '@/config/firebase'
+import { useAuth } from '@/hooks/useAuth'
 import { Entry } from '@/types/EntryType'
 import { currencyFormatter } from '@/utils/currencyFormatter'
 import { Box } from '@mui/material'
@@ -47,7 +47,11 @@ export const EntryItem: FC<IncomeItemProps> = ({
 					<p className={s.amount}>
 						{currencyFormatter(item.amount, authUser?.currency as string)}
 					</p>
-					<Box style={{ height: '1.2rem' }} onClick={handleClick}>
+					<Box
+						style={{ height: '1.2rem' }}
+						onClick={handleClick}
+						data-testid="iconRemove"
+					>
 						<MdDeleteForever className={s.iconRemove} />
 					</Box>
 				</div>

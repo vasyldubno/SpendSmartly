@@ -1,0 +1,7 @@
+.title {
+	padding-left: 1rem;
+	font-size: 1.2rem;
+	@media (max-width: 767px) {
+		display: none;
+	}
+}

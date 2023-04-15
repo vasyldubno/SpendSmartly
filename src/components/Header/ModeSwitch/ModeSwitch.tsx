@@ -1,8 +1,8 @@
 import Switch from '@mui/material/Switch'
 import { styled } from '@mui/material/styles'
 import { FC } from 'react'
+import { useMode } from '@/hooks/useMode'
 import { useTheme } from '@mui/material'
-import { useMode } from '../../../context/ThemeContext'
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 	width: 62,
@@ -57,9 +57,15 @@ export const ModeSwitch: FC = () => {
 
 	return (
 		<MaterialUISwitch
+			disableRipple
+			disableTouchRipple
+			disableFocusRipple
 			sx={{ m: 1 }}
 			onChange={changeMode}
 			defaultChecked={theme.palette.mode === 'dark'}
+			aria-label="Change mode"
+			aria-checked="false"
+			role="radio"
 		/>
 	)
 }

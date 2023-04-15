@@ -1,0 +1,12 @@
+// @import '@/styles/globals';
+@import '@/styles/mixins';
+
+.title {
+	text-align: center;
+	font-weight: 400;
+	@include adaptiv-font(40, 20);
+}
+
+.bold {
+	font-weight: 700;
+}

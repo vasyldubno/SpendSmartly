@@ -9,45 +9,8 @@ import {
 } from 'firebase/auth'
 import { addDoc, collection, getDocs } from 'firebase/firestore'
 import { useRouter } from 'next/router'
-import {
-	FC,
-	PropsWithChildren,
-	createContext,
-	useContext,
-	useEffect,
-	useState,
-	Dispatch,
-	SetStateAction,
-} from 'react'
-
-interface AuthUser {
-	uid: string
-	email: string | null
-	currency?: string
-}
-
-interface IAuthContext {
-	authUser: AuthUser | null
-	isLoading: boolean
-	signOut: () => void
-	signIn: (email: string, password: string) => Promise<string | void | null>
-	signUp: (
-		email: string,
-		password: string,
-		displayName: string,
-		currency: string
-	) => void
-	setAuthUser: Dispatch<SetStateAction<AuthUser | null>>
-}
-
-const AuthContext = createContext<IAuthContext>({
-	authUser: null,
-	isLoading: true,
-	signOut: () => {},
-	signIn: async (email, password) => {},
-	signUp(email, password, displayName, currency) {},
-	setAuthUser: () => {},
-})
+import { FC, PropsWithChildren, useEffect, useState } from 'react'
+import { AuthContext, AuthUser } from '@/context/AuthContext'
 
 const getCurrency = async (id: string) => {
 	const result = await getDocs(collection(db, `users/${id}/settings`))
@@ -88,6 +51,7 @@ export const useFirebaseAuth = () => {
 		authSignOut(auth).then(() => {
 			setAuthUser(null)
 			setIsLoading(false)
+			localStorage.removeItem('authorized')
 		})
 	}
 
@@ -106,6 +70,7 @@ export const useFirebaseAuth = () => {
 				})
 				setIsLoading(false)
 				router.push('/dashboard')
+				localStorage.setItem('authorized', 'true')
 			})
 			.catch((error: Error): string | null => {
 				console.log('error.message AuthProvider', error.message)
@@ -153,6 +118,7 @@ export const useFirebaseAuth = () => {
 				}
 				router.push('/dashboard')
 				setIsLoading(false)
+				localStorage.setItem('authorized', 'true')
 			})
 			.catch((error: Error) => console.log(error.message))
 	}
@@ -176,5 +142,3 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
 	const auth = useFirebaseAuth()
 	return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>
 }
-
-export const useAuth = () => useContext(AuthContext)

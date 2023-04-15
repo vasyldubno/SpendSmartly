@@ -1,23 +1,32 @@
-@import './variables';
-
 :root {
 	--color-test: #0dc916;
 	--color-gray: #dad1d1;
 	--color-gray-50: #dad1d150;
-	--color-red: #fd3c4a;
+	--color-red: #e9011c;
 	--color-black: #000;
 	--color-black-const: #000;
 	--color-white: #fff;
-	--color-green: #00a86b;
+	--color-green: #008554;
 	--color-purple: #7f3dff;
 	--color-border-input: rgba(0, 0, 0, 0.23);
+
+	--font: 'Roboto Mono', monospace;
 }
 
 * {
-	font-family: $font;
+	font-family: var(--font);
 }
 
 p {
+	margin: 0;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+h2 {
 	margin: 0;
 }
 

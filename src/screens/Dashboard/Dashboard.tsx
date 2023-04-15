@@ -1,15 +1,29 @@
-import { startOfMonth } from 'date-fns'
-import { collection, onSnapshot } from 'firebase/firestore'
+import { lastDayOfMonth, startOfDay, startOfMonth } from 'date-fns'
+import {
+	DocumentData,
+	QuerySnapshot,
+	collection,
+	onSnapshot,
+	query,
+	where,
+} from 'firebase/firestore'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import {
+	useCallback,
+	useEffect,
+	useLayoutEffect,
+	useRef,
+	useState,
+} from 'react'
 import { Expense } from './Dashboard.interface'
-import { useAuth } from '@/components/AuthProvider'
 import { Balance } from '@/components/Balance/Balance'
-import { Chart } from '@/components/Chart'
+import { Chart } from '@/components/Chart/Chart'
 import { Expenses } from '@/components/Expenses/Expenses'
-import { HeadLayout } from '@/components/HeadLayout'
+import { HeadLayout } from '@/components/HeadLayout/HeadLayout'
 import { Header } from '@/components/Header/Header'
+import { PROJECT_NAME } from '@/config/consts'
 import { db } from '@/config/firebase'
+import { useAuth } from '@/hooks/useAuth'
 import { firebaseService } from '@/services/firebaseService'
 
 export const Dashboard = () => {
@@ -22,16 +36,22 @@ export const Dashboard = () => {
 	const { authUser, isLoading } = useAuth()
 	const userId = authUser?.uid as string
 
-	console.log(authUser)
+	useEffect(() => {
+		const localUser = localStorage.getItem('authorized') as string
+		if (localUser !== 'true') {
+			router.push('/')
+		}
+	}, [])
 
 	useEffect(() => {
-		firebaseService.getBalance(userId, setBalance)
-	}, [userId, expenses])
-
-	useEffect(() => {
-		const expenseSnapshot = onSnapshot(
+		const docRef = query(
 			collection(db, `users/${userId}/expenses`),
-			(snapshot) => {
+			where('date', '>=', startOfDay(startDate)),
+			where('date', '<=', lastDayOfMonth(endDate))
+		)
+		const expenseSnapshot = onSnapshot(
+			docRef,
+			(snapshot: QuerySnapshot<DocumentData>) => {
 				const data = snapshot.docs.map((item) => item.data())
 
 				const categoriesSum: Expense[] = []
@@ -61,18 +81,16 @@ export const Dashboard = () => {
 		return () => {
 			expenseSnapshot()
 		}
-	}, [])
+	}, [userId])
 
 	useEffect(() => {
-		if (!authUser) {
-			router.push('/')
-		}
-	}, [authUser])
+		firebaseService.getBalance(userId, setBalance)
+	}, [userId, expenses])
 
 	useEffect(() => {
 		firebaseService
 			.fetchItemsByDate('expenses', startDate, endDate)
-			.then((res) => {
+			.then((res: DocumentData[]) => {
 				const categoriesSum: Expense[] = []
 
 				res.forEach((item) => {
@@ -99,7 +117,7 @@ export const Dashboard = () => {
 		<>
 			{authUser && !isLoading ? (
 				<>
-					<HeadLayout />
+					<HeadLayout title={`Dashboard | ${PROJECT_NAME}`} />
 					<Header />
 					<Balance balance={balance} />
 					<Expenses

@@ -1,7 +1,5 @@
-import { applyActionCode, checkActionCode } from 'firebase/auth'
+import { checkActionCode } from 'firebase/auth'
 import { GetServerSidePropsContext, NextPage } from 'next'
-import { useRouter } from 'next/router'
-import { useEffect } from 'react'
 import { auth } from '@/config/firebase'
 import { ResetPassword } from '@/screens/ResetPassword/ResetPassword'
 

@@ -5,16 +5,33 @@
 }
 
 .header {
-	margin-bottom: 1rem;
+	margin-bottom: 2rem;
 	display: flex;
 	align-items: center;
 	gap: 1rem;
+	@media (max-width: 767px) {
+		flex-direction: column;
+		gap: 0;
+	}
 }
 
 .empty {
 	margin: 0 auto;
+	text-align: center;
 }
 
 .title {
 	margin-right: 1rem;
+	@media (max-width: 767px) {
+		margin-bottom: 1rem;
+		margin-top: 1rem;
+	}
+}
+
+.datePickers {
+	display: flex;
+	gap: 1rem;
+	@media (max-width: 389px) {
+		flex-direction: column;
+	}
 }

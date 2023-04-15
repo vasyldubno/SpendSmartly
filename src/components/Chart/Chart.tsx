@@ -1,12 +1,6 @@
-import {
-	ArcElement,
-	Chart as ChartJS,
-	CoreChartOptions,
-	Legend,
-	Tooltip,
-} from 'chart.js'
+import { ArcElement, Chart as ChartJS, Legend, Tooltip } from 'chart.js'
 import { FC } from 'react'
-import { Doughnut, Pie } from 'react-chartjs-2'
+import { Doughnut } from 'react-chartjs-2'
 import s from './Chart.module.scss'
 import {
 	colorBgDark,
@@ -46,8 +40,8 @@ export const Chart: FC<ChartProps> = ({ list }) => {
 	}
 
 	return (
-		<Container>
-			<h2>Stats</h2>
+		<Container className={s.container}>
+			<h2 className={s.title}>Stats</h2>
 			<div className={s.chart}>
 				<Doughnut
 					data={{

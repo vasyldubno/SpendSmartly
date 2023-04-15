@@ -1,15 +1,15 @@
-import { useAuth } from '../AuthProvider'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { FC } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { FaUserCircle } from 'react-icons/fa'
+import { Hamburger } from './Hamburger/Hamburger'
 import s from './Header.module.scss'
-import { ModeSwitch } from './ModeSwitch'
+import { ModeSwitch } from './ModeSwitch/ModeSwitch'
 import { colorPurple, colorWhite } from '@/config/colors'
-import { FONT } from '@/config/consts'
 import { auth } from '@/config/firebase'
-import { Box, Button, useTheme } from '@mui/material'
+import { useAuth } from '@/hooks/useAuth'
+import { Box, useTheme } from '@mui/material'
 import { ButtonBase } from '../UI/ButtonBase/ButtonBase'
 import { Container } from '../UI/Container/Container'
 
@@ -17,6 +17,15 @@ export const Header: FC = () => {
 	const { authUser, isLoading, signOut } = useAuth()
 	const router = useRouter()
 	const theme = useTheme()
+
+	// const isLoading = false
+	// const [authUser, setAuthUser] = useState(false)
+	// useEffect(() => {
+	// 	const authorized = localStorage.getItem('authorized')
+	// 	if (authorized) {
+	// 		setAuthUser(true)
+	// 	}
+	// }, [])
 
 	const handleSignOut = () => {
 		signOut()
@@ -32,7 +41,7 @@ export const Header: FC = () => {
 			}}
 		>
 			<div className={s.leftSide}>
-				<Link href="/">
+				<Link href="/" aria-label="Profile">
 					<div className={s.imageWrapper}>
 						{auth?.currentUser?.photoURL === null ? (
 							<FaUserCircle id="dark" className={s.image} />
@@ -51,7 +60,7 @@ export const Header: FC = () => {
 			</div>
 			<div className={s.rightSide}>
 				<ModeSwitch />
-				<Link href="/settings" data-testid="settings">
+				<Link href="/settings" data-testid="settings" aria-label="Settings">
 					<Box style={{ width: '2rem', height: '2rem' }}>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
@@ -82,6 +91,7 @@ export const Header: FC = () => {
 					/>
 				)}
 			</div>
+			<Hamburger />
 		</Container>
 	)
 }

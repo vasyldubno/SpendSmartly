@@ -1,24 +1,32 @@
-import {
-	createContext,
-	FC,
-	PropsWithChildren,
-	useContext,
-	useEffect,
-	useMemo,
-	useState,
-} from 'react'
+import { FC, PropsWithChildren, useEffect, useMemo, useState } from 'react'
 import { colorBgDark, colorBgLite } from '@/config/colors'
 import { FONT } from '@/config/consts'
-import { createTheme, ThemeProvider } from '@mui/material'
-
-type ContextType = {
-	changeMode: () => void
-}
-
-const ChangeContext = createContext<ContextType>({ changeMode: () => {} })
+import { ChangeContext } from '@/context/ChangeContext'
+import { createTheme, ThemeProvider, useMediaQuery } from '@mui/material'
 
 export const ThemeContext: FC<PropsWithChildren> = ({ children }) => {
 	const [darkMode, setDarkMode] = useState<boolean>(false)
+
+	const smallPhone = useMediaQuery('(min-width: 279px)')
+	const bigPhone = useMediaQuery('(min-width: 389px)')
+	const tablet = useMediaQuery('(min-width: 767px)')
+	const smallLaptop = useMediaQuery('(min-width: 1280px)')
+	const bigLaptop = useMediaQuery('(min-width: 1440px)')
+
+	const changeFont = () => {
+		if (smallLaptop || bigLaptop) {
+			return 14
+		}
+		if (tablet) {
+			return 13
+		}
+		if (bigPhone) {
+			return 12
+		}
+		if (smallPhone) {
+			return 10
+		}
+	}
 
 	const theme = createTheme({
 		palette: {
@@ -29,6 +37,7 @@ export const ThemeContext: FC<PropsWithChildren> = ({ children }) => {
 		},
 		typography: {
 			fontFamily: FONT,
+			fontSize: 14,
 		},
 	})
 
@@ -64,5 +73,3 @@ export const ThemeContext: FC<PropsWithChildren> = ({ children }) => {
 		</ChangeContext.Provider>
 	)
 }
-
-export const useMode = () => useContext(ChangeContext)

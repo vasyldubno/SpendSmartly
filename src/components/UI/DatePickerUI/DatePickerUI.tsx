@@ -1,8 +1,6 @@
 import React, { Dispatch, FC, SetStateAction } from 'react'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
-import { BsCalendar3 } from 'react-icons/bs'
-import { TextField } from '@mui/material'
 
 interface DatePickerUIProps {
 	selectedDate: Date

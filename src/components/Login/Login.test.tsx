@@ -1,10 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react'
 import { Login } from './Login'
 
-jest.mock('firebase/functions', () => ({
-	getFunctions: jest.fn(),
-}))
-
 const mockPush = jest.fn()
 const useRouter = jest.spyOn(require('next/router'), 'useRouter')
 

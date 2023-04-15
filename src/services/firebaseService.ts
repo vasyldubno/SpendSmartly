@@ -26,52 +26,59 @@ interface Doc extends DocumentData {
 	id: string
 }
 
-export const fetchCollection = async (collect: string) => {
-	try {
-		const data = await getDocs(
-			query(
-				collection(db, `users/${auth.currentUser?.uid as string}/${collect}`),
-				orderBy('date', 'desc')
-			)
-		)
-		const result: Doc[] = data.docs.map((item) => {
-			return {
-				...item.data(),
-				id: item.id,
-			}
-		})
-		return result
-	} catch (e) {
-		return e
-	}
-}
-
-export const addCategory = async (
-	name: string,
-	color: string,
-	collect: string
-) => {
-	await addDoc(
-		collection(
-			db,
-			`users/${
-				auth.currentUser?.uid as string
-			}/categories${capitalizeFirstLetter(collect)}s`
-		),
-		{ name, color }
-	)
-}
-
-export const fetchCategoryItems = async (category: string, userId: string) => {
-	const docRef = query(
-		collection(db, `users/${userId}/expenses`),
-		where('category', '==', `${category}`)
-	)
-	const result = await getDocs(docRef)
-	return result
-}
-
 export const firebaseService = {
+	fetchCollection: async (collect: string) => {
+		try {
+			const data = await getDocs(
+				query(
+					collection(db, `users/${auth.currentUser?.uid as string}/${collect}`),
+					orderBy('date', 'desc')
+				)
+			)
+			const result: Doc[] = data.docs.map((item) => {
+				return {
+					...item.data(),
+					id: item.id,
+				}
+			})
+			return result
+		} catch (e) {
+			return e
+		}
+	},
+
+	fetchCategoryItems: async (
+		category: string,
+		userId: string,
+		startDate: Date,
+		endDate: Date
+	) => {
+		try {
+			const docRef = query(
+				collection(db, `users/${userId}/expenses`),
+				where('category', '==', `${category}`),
+				where('date', '>=', startOfDay(startDate)),
+				where('date', '<=', lastDayOfMonth(endDate))
+			)
+			const result = await getDocs(docRef)
+			return result
+		} catch (error) {
+			throw new Error(`firebaseService.fetchCategoryItems => ${error}`)
+		}
+	},
+
+	addCategory: async (name: string, color: string, collect: string) => {
+		await addDoc(
+			collection(
+				db,
+				`users/${
+					auth.currentUser?.uid as string
+				}/categories${capitalizeFirstLetter(collect)}s`
+			),
+			{ name, color }
+		)
+	},
+
 	forgotPassword: (email: string) => {
 		return sendPasswordResetEmail(auth, email)
 	},
@@ -131,6 +138,7 @@ export const firebaseService = {
 	handleGoogleAuth: async (router: NextRouter) => {
 		await signInWithPopup(auth, new GoogleAuthProvider()).then(
 			async (credentials) => {
+				localStorage.setItem('authorized', 'true')
 				const settings = await getDocs(
 					collection(db, `users/${credentials.user.uid}/settings`)
 				)

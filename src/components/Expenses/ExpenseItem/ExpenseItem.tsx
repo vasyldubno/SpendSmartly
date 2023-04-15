@@ -1,10 +1,9 @@
-import { DocumentData } from 'firebase/firestore'
 import { FC, useState } from 'react'
 import s from './ExpenseItem.module.scss'
-import { useAuth } from '@/components/AuthProvider'
 import { EntryItem } from '@/components/UI/EntryItem/EntryItem'
-import { ModalBasic } from '@/components/UI/ModalBasic'
-import { fetchCategoryItems } from '@/services/firebaseService'
+import { ModalBasic } from '@/components/UI/ModalBasic/ModalBasic'
+import { useAuth } from '@/hooks/useAuth'
+import { firebaseService } from '@/services/firebaseService'
 import { Entry } from '@/types/EntryType'
 import { currencyFormatter } from '@/utils/currencyFormatter'
 
@@ -16,9 +15,15 @@ interface Expense {
 
 interface ExpenseItemProps {
 	item: Expense
+	startDate: Date
+	endDate: Date
 }
 
-export const ExpenseItem: FC<ExpenseItemProps> = ({ item }) => {
+export const ExpenseItem: FC<ExpenseItemProps> = ({
+	item,
+	startDate,
+	endDate,
+}) => {
 	const [open, setOpen] = useState<boolean>(false)
 	const [listExpenses, setListExpenses] = useState<Entry[]>([])
 
@@ -26,13 +31,21 @@ export const ExpenseItem: FC<ExpenseItemProps> = ({ item }) => {
 
 	const handleClick = async () => {
 		setOpen(true)
-		await fetchCategoryItems(item.category, authUser?.uid as string)
+		await firebaseService
+			.fetchCategoryItems(
+				item.category,
+				authUser?.uid as string,
+				startDate,
+				endDate
+			)
 			.then((res) => {
 				return res.docs.map((item) => {
 					return { ...item.data(), id: item.id }
 				}) as Entry[]
 			})
-			.then((res) => setListExpenses(res))
+			.then((res) => {
+				setListExpenses(res)
+			})
 	}
 
 	return (

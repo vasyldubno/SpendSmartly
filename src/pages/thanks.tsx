@@ -2,9 +2,9 @@ import { NextPage } from 'next'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
-import { useAuth } from '@/components/AuthProvider'
 import { Container } from '@/components/UI/Container/Container'
-import { Loader } from '@/components/UI/Loader'
+import { Loader } from '@/components/UI/Loader/Loader'
+import { useAuth } from '@/hooks/useAuth'
 import { Box } from '@mui/material'
 
 const ThanksPage: NextPage = () => {

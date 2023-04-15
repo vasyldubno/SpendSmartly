@@ -1,9 +1,8 @@
-import { useAuth } from '../AuthProvider'
 import { Modal } from '../Modal/Modal'
-import { FC, useEffect, useState } from 'react'
+import { FC, useEffect, useState, memo } from 'react'
 import s from './Balance.module.scss'
 import { colorGreen, colorRed } from '@/config/colors'
-import { LogoIcon } from '@/icons/LogoIcon'
+import { useAuth } from '@/hooks/useAuth'
 import { currencyFormatter } from '@/utils/currencyFormatter'
 import { ButtonUI } from '../UI/Button/Button'
 import { Container } from '../UI/Container/Container'
@@ -31,9 +30,7 @@ export const Balance: FC<BalanceProps> = ({ balance }) => {
 	}, [authUser, balance])
 
 	return (
-		<Container
-			styles={{ marginBottom: '2rem', marginTop: '2rem', display: 'flex' }}
-		>
+		<Container className={s.container}>
 			<section className={s.sectionCurrency}>
 				<p>Account Balance</p>
 				<p>{totalBalance}</p>
@@ -43,6 +40,7 @@ export const Balance: FC<BalanceProps> = ({ balance }) => {
 					title="ADD EXPENSE"
 					color={colorRed}
 					onClick={() => handleClick('expenses')}
+					arrow="down"
 				/>
 				<ButtonUI
 					title="ADD INCOME"

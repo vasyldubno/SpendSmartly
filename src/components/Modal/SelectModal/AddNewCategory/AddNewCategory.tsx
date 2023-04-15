@@ -8,10 +8,10 @@ import {
 } from 'react'
 import s from './AddNewCategory.module.scss'
 import { ButtonBase } from '@/components/UI/ButtonBase/ButtonBase'
-import { ModalBasic } from '@/components/UI/ModalBasic'
+import { ModalBasic } from '@/components/UI/ModalBasic/ModalBasic'
 import { colorPurple, colorWhite } from '@/config/colors'
 import { useDarkMode } from '@/hooks/useDarkMode'
-import { addCategory } from '@/services/firebaseService'
+import { firebaseService } from '@/services/firebaseService'
 import { Button, TextField } from '@mui/material'
 
 interface AddNewCategoryProps {
@@ -33,7 +33,7 @@ export const AddNewCategory: FC<AddNewCategoryProps> = ({
 
 	const handleClick = () => {
 		if (value.length > 0) {
-			addCategory(value, color, selectedCollection)
+			firebaseService.addCategory(value, color, selectedCollection)
 			setModalOpen(false)
 		} else {
 			setErrorMessage('Must contain at least one charachter')
@@ -43,7 +43,7 @@ export const AddNewCategory: FC<AddNewCategoryProps> = ({
 	return (
 		<ModalBasic open={open} onClose={() => setModalOpen(false)}>
 			{errorMessage && <p className={s.error}>{errorMessage}</p>}
-			<div style={{ display: 'flex', height: '50px' }}>
+			<div className={s.inputs}>
 				<input
 					type="color"
 					value={color}

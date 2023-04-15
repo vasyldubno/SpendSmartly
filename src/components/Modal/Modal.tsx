@@ -1,25 +1,19 @@
-import { useAuth } from '../AuthProvider'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
 import ModalMUI from '@mui/material/Modal'
 import Typography from '@mui/material/Typography'
 import {
 	DocumentData,
-	FieldPath,
-	FieldValue,
 	Timestamp,
 	addDoc,
 	collection,
 	doc,
-	getDoc,
+	getDocs,
+	increment,
 	onSnapshot,
 	orderBy,
 	query,
-	setDoc,
 	updateDoc,
-	increment,
-	getDocs,
 } from 'firebase/firestore'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Dispatch, FC, useEffect, useState } from 'react'
@@ -29,13 +23,14 @@ import s from './Modal.module.scss'
 import { SelectModal } from './SelectModal/SelectModal'
 import { colorPurple, colorWhite } from '@/config/colors'
 import { db } from '@/config/firebase'
+import { useAuth } from '@/hooks/useAuth'
 import { useDarkMode } from '@/hooks/useDarkMode'
-import { fetchCollection, firebaseService } from '@/services/firebaseService'
+import { firebaseService } from '@/services/firebaseService'
 import { Entry } from '@/types/EntryType'
 import { capitalizeFirstLetter } from '@/utils/capitalizeFirstLetter'
-import { TextField, useTheme } from '@mui/material'
+import { TextField } from '@mui/material'
 import { ButtonBase } from '../UI/ButtonBase/ButtonBase'
-import { DatePickerUI } from '../UI/DatePickerUI'
+import { DatePickerUI } from '../UI/DatePickerUI/DatePickerUI'
 import { EntryItem } from '../UI/EntryItem/EntryItem'
 
 interface ModalProps {
@@ -52,13 +47,10 @@ export const Modal: FC<ModalProps> = ({
 	const [incomeItems, setIncomeItems] = useState<Entry[] | []>([])
 	const [categories, setCategories] = useState<DocumentData[]>([])
 	const [selectedDate, setSelectedDate] = useState<Date>(new Date())
-	const [errorAmount, setErrorAmount] = useState<string>('')
-	const [prevBalance, setPrevBalance] = useState<number>(0)
 
 	const darkMode = useDarkMode()
 	const { authUser } = useAuth()
 	const userId = authUser?.uid as string
-	const currency = authUser?.currency as string
 
 	const numberRegex = /^(\d+(\.\d*)?|\.\d+)$/
 
@@ -103,6 +95,7 @@ export const Modal: FC<ModalProps> = ({
 
 	const onSubmit: SubmitHandler<FormSchema> = async (data) => {
 		reset()
+		handleClose()
 		setSelectedDate(new Date())
 
 		const selectedCategory = categories.find(
@@ -153,7 +146,9 @@ export const Modal: FC<ModalProps> = ({
 	useEffect(() => {
 		if (selectedCollection.length > 0) {
 			const fetch = async () => {
-				const result = (await fetchCollection(selectedCollection)) as Entry[]
+				const result = (await firebaseService.fetchCollection(
+					selectedCollection
+				)) as Entry[]
 				setIncomeItems(result)
 			}
 			fetch()
@@ -210,7 +205,11 @@ export const Modal: FC<ModalProps> = ({
 				aria-describedby="modal-modal-description"
 			>
 				<Box className={s.wrapper}>
-					<form onSubmit={handleSubmit(onSubmit)} className={s.form}>
+					<form
+						onSubmit={handleSubmit(onSubmit)}
+						className={s.form}
+						data-testid="form"
+					>
 						<Box className={s.inputs}>
 							{errors.amount && (
 								<p className={s.error}>{errors.amount.message}</p>
@@ -299,7 +298,7 @@ export const Modal: FC<ModalProps> = ({
 						/>
 					</form>
 
-					<Typography className={s.header}>Income History</Typography>
+					{/* <Typography className={s.header}>Income History</Typography>
 					<AnimatePresence>
 						{incomeItems.length > 0 &&
 							incomeItems.map((item, index) => (
@@ -322,7 +321,7 @@ export const Modal: FC<ModalProps> = ({
 									/>
 								</motion.div>
 							))}
-					</AnimatePresence>
+					</AnimatePresence> */}
 				</Box>
 			</ModalMUI>
 		</div>

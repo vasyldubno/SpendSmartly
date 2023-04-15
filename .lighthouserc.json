@@ -2,7 +2,7 @@
 	"ci": {
 		"collect": {
 			"staticDistDir": ".next",
-			"numberOfRuns": 1
+			"numberOfRuns": 3
 		},
 		"upload": {
 			"target": "temporary-public-storage"

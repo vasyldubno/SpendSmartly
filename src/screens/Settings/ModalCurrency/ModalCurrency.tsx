@@ -1,6 +1,6 @@
 import { FC, SetStateAction, useState } from 'react'
-import { useAuth } from '@/components/AuthProvider'
-import { ModalBasic } from '@/components/UI/ModalBasic'
+import { ModalBasic } from '@/components/UI/ModalBasic/ModalBasic'
+import { useAuth } from '@/hooks/useAuth'
 import { firebaseService } from '@/services/firebaseService'
 import { Currency } from '@/types/CurrencyType'
 import { getListCurrencies } from '@/utils/getListCurrencies'

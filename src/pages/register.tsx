@@ -1,18 +1,13 @@
-import { Register } from '@/components/Register/Register'
-import { Container } from '@/components/UI/Container/Container'
+import { HeadLayout } from '@/components/HeadLayout/HeadLayout'
+import { PROJECT_NAME } from '@/config/consts'
+import { RegisterScreen } from '@/screens/RegisterScreen/RegisterScreen'
 
 const RegisterPage = () => {
 	return (
-		<Container
-			styles={{
-				display: 'flex',
-				flexDirection: 'column',
-				alignItems: 'center',
-			}}
-		>
-			<h1>Registration</h1>
-			<Register />
-		</Container>
+		<>
+			<HeadLayout title={`Registration | ${PROJECT_NAME}`} />
+			<RegisterScreen />
+		</>
 	)
 }
 

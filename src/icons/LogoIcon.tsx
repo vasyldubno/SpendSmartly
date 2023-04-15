@@ -1,6 +1,6 @@
 export const LogoIcon = () => {
 	return (
-		<>
+		<div>
 			<svg
 				height="100%"
 				width="30"
@@ -21,6 +21,6 @@ export const LogoIcon = () => {
 					/>
 				</g>
 			</svg>
-		</>
+		</div>
 	)
 }

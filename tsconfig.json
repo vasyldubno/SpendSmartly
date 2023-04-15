@@ -29,8 +29,9 @@
 		"**/*.ts",
 		"**/*.tsx",
 		"cypress/**/*",
-		"jest.config.ts"
-		// "next.config.js"
+		"jest.config.ts",
+		"src/components/UI/EntryItem/EntryItem.test.tsz", // "next.config.js"
+		"next.config.js"
 	],
 	"exclude": ["node_modules", "next.config.js"]
 }

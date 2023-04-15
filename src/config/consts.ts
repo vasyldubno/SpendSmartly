@@ -8,4 +8,4 @@ export const APP_ID = process.env.NEXT_PUBLIC_APP_ID as string
 
 export const FONT = "'Roboto Mono', monospace"
 
-export const PROJECT_NAME = 'Finance Tracker'
+export const PROJECT_NAME = 'SpendSmartly'

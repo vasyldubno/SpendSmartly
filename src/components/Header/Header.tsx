@@ -41,7 +41,7 @@ export const Header: FC = () => {
 			}}
 		>
 			<div className={s.leftSide}>
-				<Link href="/" aria-label="Profile">
+				<Link href="/dashboard" aria-label="Profile">
 					<div className={s.imageWrapper}>
 						{auth?.currentUser?.photoURL === null ? (
 							<FaUserCircle id="dark" className={s.image} />

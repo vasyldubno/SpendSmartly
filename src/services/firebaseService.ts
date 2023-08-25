@@ -51,11 +51,12 @@ export const firebaseService = {
 		category: string,
 		userId: string,
 		startDate: Date,
-		endDate: Date
+		endDate: Date,
+		collect: string
 	) => {
 		try {
 			const docRef = query(
-				collection(db, `users/${userId}/expenses`),
+				collection(db, `users/${userId}/${collect}`),
 				where('category', '==', `${category}`),
 				where('date', '>=', startOfDay(startDate)),
 				where('date', '<=', lastDayOfMonth(endDate))

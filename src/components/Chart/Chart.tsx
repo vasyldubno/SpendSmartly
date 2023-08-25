@@ -21,9 +21,10 @@ interface Expense {
 
 interface ChartProps {
 	list: Expense[]
+	label: string
 }
 
-export const Chart: FC<ChartProps> = ({ list }) => {
+export const Chart: FC<ChartProps> = ({ list, label }) => {
 	const theme = useTheme()
 
 	const options = {
@@ -48,7 +49,7 @@ export const Chart: FC<ChartProps> = ({ list }) => {
 						labels: list.map((item) => item.category),
 						datasets: [
 							{
-								label: 'Expenses',
+								label,
 								data: list.map((item) => item.totalAmount),
 								backgroundColor: list.map((item) => item.color),
 								borderColor:

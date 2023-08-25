@@ -17,12 +17,14 @@ interface ExpenseItemProps {
 	item: Expense
 	startDate: Date
 	endDate: Date
+	collection: string
 }
 
 export const ExpenseItem: FC<ExpenseItemProps> = ({
 	item,
 	startDate,
 	endDate,
+	collection,
 }) => {
 	const [open, setOpen] = useState<boolean>(false)
 	const [listExpenses, setListExpenses] = useState<Entry[]>([])
@@ -36,7 +38,8 @@ export const ExpenseItem: FC<ExpenseItemProps> = ({
 				item.category,
 				authUser?.uid as string,
 				startDate,
-				endDate
+				endDate,
+				collection
 			)
 			.then((res) => {
 				return res.docs.map((item) => {
@@ -82,7 +85,7 @@ export const ExpenseItem: FC<ExpenseItemProps> = ({
 							key={expense.id}
 							item={expense}
 							setIncomeItems={setListExpenses}
-							collection="expenses"
+							collection={collection}
 						/>
 					))}
 			</ModalBasic>

@@ -12,4 +12,6 @@ export interface ExpensesProps {
 	endDate: Date
 	setStartDate: Dispatch<SetStateAction<Date>>
 	setEndDate: Dispatch<SetStateAction<Date>>
+	title: string
+	collection: string
 }

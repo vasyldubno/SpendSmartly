@@ -1,9 +1,9 @@
 import { ThemeContext } from '../providers/ThemeContext'
-import '../styles/globals.scss'
 import type { AppProps, NextWebVitalsMetric } from 'next/app'
 import Head from 'next/head'
 import React, { useEffect } from 'react'
 import { AuthProvider } from '@/providers/AuthProvider'
+import '@/styles/globals.scss'
 import { reportAccessibility } from '@/utils/reportAccessibility'
 import { CssBaseline, StyledEngineProvider } from '@mui/material'
 

@@ -12,12 +12,13 @@ export const Expenses: FC<ExpensesProps> = ({
 	endDate,
 	setEndDate,
 	setStartDate,
+	title,
+	collection,
 }) => {
-	console.log(list)
 	return (
 		<Container>
 			<Box className={s.header}>
-				<h2 className={s.title}>My Expenses</h2>
+				<h2 className={s.title}>{title}</h2>
 				<div className={s.datePickers}>
 					<DatePickerUI
 						selectedDate={startDate}
@@ -46,10 +47,11 @@ export const Expenses: FC<ExpensesProps> = ({
 							key={index}
 							startDate={startDate}
 							endDate={endDate}
+							collection={collection}
 						/>
 					))
 				) : (
-					<p className={s.empty}>You don&apos;t have expenses yet.</p>
+					<p className={s.empty}>You don&apos;t have transactions yet.</p>
 				)}
 			</section>
 		</Container>

@@ -1,6 +1,13 @@
 import { format } from 'date-fns'
 import { toDate } from 'date-fns/fp'
-import { deleteDoc, doc, updateDoc, increment } from 'firebase/firestore'
+import {
+	deleteDoc,
+	doc,
+	updateDoc,
+	increment,
+	getDocs,
+	collection,
+} from 'firebase/firestore'
 import { Dispatch, FC, SetStateAction } from 'react'
 import { MdDeleteForever } from 'react-icons/md'
 import s from './EntryItem.module.scss'
@@ -25,17 +32,25 @@ export const EntryItem: FC<IncomeItemProps> = ({
 	const userId = authUser?.uid as string
 
 	const handleClick = async () => {
-		await deleteDoc(doc(db, `users/${userId}/${collect}`, item.id))
-		setIncomeItems((prev) => prev.filter((doc) => doc.id !== item.id))
-		if (collect === 'expenses') {
-			await updateDoc(doc(db, `users/${userId}/settings`, 'settings'), {
-				balance: increment(item.amount),
-			})
-		}
-		if (collect === 'incomes') {
-			await updateDoc(doc(db, `users/${userId}/settings`, 'settings'), {
-				balance: increment(-item.amount),
-			})
+		const settingDoc = await getDocs(collection(db, `users/${userId}/settings`))
+		const settingIds = settingDoc.docs.map((item) => item.id)
+
+		if (settingIds) {
+			await deleteDoc(doc(db, `users/${userId}/${collect}`, item.id))
+
+			setIncomeItems((prev) => prev.filter((doc) => doc.id !== item.id))
+
+			if (collect === 'expenses') {
+				await updateDoc(doc(db, `users/${userId}/settings`, settingIds[0]), {
+					balance: increment(item.amount),
+				})
+			}
+
+			if (collect === 'incomes') {
+				await updateDoc(doc(db, `users/${userId}/settings`, settingIds[0]), {
+					balance: increment(-item.amount),
+				})
+			}
 		}
 	}
 

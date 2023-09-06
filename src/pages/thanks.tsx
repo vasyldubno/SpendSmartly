@@ -30,7 +30,14 @@ const ThanksPage: NextPage = () => {
 					<Link href="/dashboard">Go to dashboard</Link>
 				</Container>
 			) : (
-				<Box style={{ display: 'flex', justifyContent: 'center' }}>
+				<Box
+					style={{
+						display: 'flex',
+						justifyContent: 'center',
+						width: '200px',
+						height: '200px',
+					}}
+				>
 					<Loader />
 				</Box>
 			)}

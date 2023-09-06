@@ -67,6 +67,8 @@ export const Settings = () => {
 							display: 'flex',
 							flexDirection: 'column',
 							alignItems: 'center',
+							width: '200px',
+							height: '200px',
 						}}
 					>
 						<Loader />

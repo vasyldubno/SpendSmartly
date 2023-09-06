@@ -21,6 +21,7 @@ import { Chart } from '@/components/Chart/Chart'
 import { Expenses } from '@/components/Expenses/Expenses'
 import { HeadLayout } from '@/components/HeadLayout/HeadLayout'
 import { Header } from '@/components/Header/Header'
+import { Divider } from '@/components/UI/Divider/Divider'
 import { PROJECT_NAME } from '@/config/consts'
 import { db } from '@/config/firebase'
 import { useAuth } from '@/hooks/useAuth'
@@ -189,7 +190,12 @@ export const Dashboard = () => {
 					<Header />
 					<Balance balance={balance} />
 					<div
-						style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}
+						style={{
+							display: 'flex',
+							flexDirection: 'column',
+							gap: '2rem',
+							marginTop: '1rem',
+						}}
 					>
 						<div>
 							<Expenses
@@ -205,6 +211,8 @@ export const Dashboard = () => {
 								<Chart list={expenses} label="Expenses" />
 							)}
 						</div>
+
+						<Divider />
 
 						<div>
 							<Expenses

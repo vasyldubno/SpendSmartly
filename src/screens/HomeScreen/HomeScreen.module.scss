@@ -4,9 +4,23 @@
 .title {
 	text-align: center;
 	font-weight: 400;
+	text-wrap: balance;
 	@include adaptiv-font(40, 20);
 }
 
 .bold {
 	font-weight: 700;
+}
+
+.p {
+	text-wrap: balance;
+	text-align: center;
+	@include adaptiv-font(15, 10);
+}
+
+.h2 {
+	text-align: center;
+	font-weight: 400;
+	text-wrap: balance;
+	@include adaptiv-font(20, 10);
 }

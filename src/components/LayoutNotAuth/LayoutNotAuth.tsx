@@ -16,7 +16,9 @@ export const LayoutNotAuth = () => {
 				}}
 			>
 				<div style={{ display: 'flex' }}>
-					<LogoIcon />
+					<div style={{ width: '30px', height: '30px' }}>
+						<LogoIcon />
+					</div>
 					<h1 className={s.title}>SpendSmartly</h1>
 				</div>
 				<div>

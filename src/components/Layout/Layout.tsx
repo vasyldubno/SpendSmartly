@@ -11,7 +11,9 @@ export const Layout = () => {
 				justifyContent: 'center',
 			}}
 		>
-			<LogoIcon />
+			<div style={{ width: '30px', height: '30px' }}>
+				<LogoIcon />
+			</div>
 			<p className={s.title}>SpendSmartly</p>
 		</Container>
 	)

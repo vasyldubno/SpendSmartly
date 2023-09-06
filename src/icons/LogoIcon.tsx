@@ -7,7 +7,7 @@ export const LogoIcon = () => {
 		<div>
 			<svg
 				height="100%"
-				width="30"
+				width="100%"
 				version="1.1"
 				viewBox="0 0 20 20"
 				xmlns="http://www.w3.org/2000/svg"

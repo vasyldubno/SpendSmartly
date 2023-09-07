@@ -52,7 +52,7 @@ export const HomeScreen: FC = () => {
 				</div>
 			)}
 			{!isLoading && !authUser?.uid && (
-				<div>
+				<div style={{ marginTop: '10dvh' }}>
 					<AnimatePresence>
 						<motion.div variants={variants} initial="hidden" animate="show">
 							<motion.div variants={child}>
@@ -60,17 +60,12 @@ export const HomeScreen: FC = () => {
 									styles={{
 										display: 'flex',
 										alignItems: 'center',
-										top: '50%',
-										left: '50%',
-										position: 'absolute',
-										transform: 'translate(-50%, -50%)',
 										width: '100%',
 									}}
 								>
 									<div
 										style={{
 											width: '100%',
-											// marginTop: '5rem',
 											display: 'flex',
 											flexDirection: 'column',
 											gap: '2rem',
@@ -81,10 +76,10 @@ export const HomeScreen: FC = () => {
 												display: 'flex',
 												alignItems: 'center',
 												justifyContent: 'center',
-												gap: '2rem',
+												gap: '2dvw',
 											}}
 										>
-											<div style={{ width: '50px', height: '50px' }}>
+											<div className={s.logo}>
 												<LogoIcon />
 											</div>
 											<h1 className={`${s.title} ${s.bold}`}>SpendSmartly</h1>

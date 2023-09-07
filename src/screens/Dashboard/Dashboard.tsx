@@ -8,13 +8,7 @@ import {
 	where,
 } from 'firebase/firestore'
 import { useRouter } from 'next/router'
-import {
-	useCallback,
-	useEffect,
-	useLayoutEffect,
-	useRef,
-	useState,
-} from 'react'
+import { useEffect, useState } from 'react'
 import { Expense } from './Dashboard.interface'
 import { Balance } from '@/components/Balance/Balance'
 import { Chart } from '@/components/Chart/Chart'

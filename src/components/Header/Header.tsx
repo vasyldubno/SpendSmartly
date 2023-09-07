@@ -29,7 +29,7 @@ export const Header: FC = () => {
 
 	const handleSignOut = () => {
 		signOut()
-		router.push('/')
+		// router.push('/')
 	}
 
 	return (

@@ -46,6 +46,12 @@ export const Dashboard = () => {
 	}, [])
 
 	useEffect(() => {
+		if (!isLoading && !authUser) {
+			router.push('/')
+		}
+	}, [authUser])
+
+	useEffect(() => {
 		const docRef = query(
 			collection(db, `users/${userId}/expenses`),
 			where('date', '>=', startOfDay(startDateExpenses)),

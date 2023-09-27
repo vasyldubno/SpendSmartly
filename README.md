@@ -41,7 +41,7 @@ App that helps you keep track of income and expenses.
 <img src="https://github.com/vasyldubno/SpendSmartly/blob/main/screenshot.png" />
 
 ## Technologies
-Front-end - [Next.JS](https://nextjs.org/)
+Front-end - [Next.JS](https://nextjs.org/)  
 Back-end - [Firebase](https://firebase.google.com/)
 
 ## Deploy

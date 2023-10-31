@@ -47,7 +47,7 @@ export const ExpenseItem: FC<ExpenseItemProps> = ({
 				}) as Entry[]
 			})
 			.then((res) => {
-				setListExpenses(res)
+				setListExpenses(res.reverse())
 			})
 	}
 

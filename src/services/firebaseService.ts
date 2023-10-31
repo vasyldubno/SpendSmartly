@@ -1,6 +1,6 @@
 import { auth, db } from '../config/firebase'
 import { capitalizeFirstLetter } from '../utils/capitalizeFirstLetter'
-import { lastDayOfMonth, startOfDay } from 'date-fns'
+import { lastDayOfMonth, set, startOfDay } from 'date-fns'
 import {
 	GoogleAuthProvider,
 	confirmPasswordReset,
@@ -55,11 +55,17 @@ export const firebaseService = {
 		collect: string
 	) => {
 		try {
+			const updatedEndDate = set(lastDayOfMonth(endDate), {
+				hours: 23,
+				minutes: 59,
+				seconds: 59,
+			})
+
 			const docRef = query(
 				collection(db, `users/${userId}/${collect}`),
 				where('category', '==', `${category}`),
 				where('date', '>=', startOfDay(startDate)),
-				where('date', '<=', lastDayOfMonth(endDate))
+				where('date', '<=', updatedEndDate)
 			)
 			const result = await getDocs(docRef)
 			return result
@@ -89,10 +95,16 @@ export const firebaseService = {
 	},
 
 	fetchItemsByDate: async (collect: string, startDate: Date, endDate: Date) => {
+		const updatedEndDate = set(lastDayOfMonth(endDate), {
+			hours: 23,
+			minutes: 59,
+			seconds: 59,
+		})
+
 		const docsRef = query(
 			collection(db, `users/${auth.currentUser?.uid}/${collect}`),
 			where('date', '>=', startOfDay(startDate)),
-			where('date', '<=', lastDayOfMonth(endDate))
+			where('date', '<=', updatedEndDate)
 		)
 		const response = await getDocs(docsRef)
 		return response.docs.map((item) => {

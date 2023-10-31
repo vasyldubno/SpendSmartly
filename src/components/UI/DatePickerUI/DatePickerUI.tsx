@@ -1,3 +1,4 @@
+import { set } from 'date-fns'
 import React, { Dispatch, FC, SetStateAction } from 'react'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
@@ -20,7 +21,7 @@ export const DatePickerUI: FC<DatePickerUIProps> = ({
 	const [open, setOpen] = React.useState(false)
 
 	const handleDateChange = (date: Date) => {
-		setSelectedDate(date)
+		setSelectedDate(set(date, { hours: 23, minutes: 59, seconds: 59 }))
 		setOpen(false)
 	}
 

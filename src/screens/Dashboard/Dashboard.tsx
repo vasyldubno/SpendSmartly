@@ -55,7 +55,7 @@ export const Dashboard = () => {
 		const docRef = query(
 			collection(db, `users/${userId}/expenses`),
 			where('date', '>=', startOfDay(startDateExpenses)),
-			where('date', '<=', lastDayOfMonth(endDateExpenses))
+			where('date', '<=', endDateExpenses)
 		)
 		const expenseSnapshot = onSnapshot(
 			docRef,
@@ -89,7 +89,7 @@ export const Dashboard = () => {
 		const docRefIncomes = query(
 			collection(db, `users/${userId}/incomes`),
 			where('date', '>=', startOfDay(startDateIncomes)),
-			where('date', '<=', lastDayOfMonth(endDateIncomes))
+			where('date', '<=', endDateIncomes)
 		)
 		const incomeSnapshot = onSnapshot(
 			docRefIncomes,

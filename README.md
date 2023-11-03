@@ -44,5 +44,4 @@ App that helps you keep track of income and expenses.
 Front-end - [Next.JS](https://nextjs.org/)  
 Back-end - [Firebase](https://firebase.google.com/)
 
-## Deploy
-[Demo](https://spend-smartly.vercel.app/)
+
